@@ -163,4 +163,49 @@ if __name__ == '__main__':
                 <div style="border: 1px solid #ccc; margin-bottom: 10px; padding: 10px;">
                     <h3>{{ evento.titulo }} (ID: {{ evento.id }})</h3>
                     <p><strong>Data:</strong> {{ evento.data }}</p>
-                    {% if evento.link_transmissao
+                    {% if evento.link_transmissao %}
+                        <p><strong>Link:</strong> <a href="{{ evento.link_transmissao }}">Acessar Transmissão</a></p>
+                    {% endif %}
+                </div>
+            {% else %}
+                <p>Nenhum evento agendado.</p>
+            {% endfor %}
+        </body>
+        </html>
+        """)
+
+    # solicitar_suporte.html
+    with open('templates/solicitar_suporte.html', 'w', encoding='utf-8') as f:
+        f.write("""
+        <!doctype html>
+        <html lang="pt-br">
+        <head><title>Solicitar Suporte</title></head>
+        <body>
+            <h2>Solicitar Suporte Técnico</h2>
+            <form method="POST">
+                Seu Nome: <input type="text" name="nome" required><br>
+                Contato (Telefone/Email): <input type="text" name="contato" required><br>
+                Descreva a dificuldade (Ex: Não consigo abrir o link da live): <textarea name="descricao" required></textarea><br>
+                <input type="submit" value="Enviar Pedido">
+            </form>
+            <p><a href="/">Voltar para a Agenda</a></p>
+        </body>
+        </html>
+        """)
+
+    # confirmacao_suporte.html
+    with open('templates/confirmacao_suporte.html', 'w', encoding='utf-8') as f:
+        f.write("""
+        <!doctype html>
+        <html lang="pt-br">
+        <head><title>Confirmação</title></head>
+        <body>
+            <h2>✅ Pedido Enviado!</h2>
+            <p>Sua solicitação de suporte foi registrada. Um voluntário será notificado e entrará em contato em breve.</p>
+            <p><a href="/">Voltar para a Agenda</a></p>
+        </body>
+        </html>
+        """)
+
+    # Inicia a aplicação
+    app.run(debug=True)
